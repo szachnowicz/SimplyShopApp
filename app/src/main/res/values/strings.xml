@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SimplyShopApp</string>
+    <string name="searchInShop">Search In Shop</string>
+    <string name="searchInShopSub">Search for products</string>
+    <string name="yourOrder">You recent Order</string>
+    <string name="yourOrderSub">Your recent order details</string>
+    <string name="orderHistory">Order History</string>
+    <string name="orderHistorySub">See hisotory of you orders</string>
+</resources>

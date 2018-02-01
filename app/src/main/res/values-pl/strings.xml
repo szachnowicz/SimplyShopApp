@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimplyShopApp</string>
+    <string name="searchInShop">Szukaj w sklepie</string>
+    <string name="searchInShopSub">Wyszukaj produkt</string>
+    <string name="yourOrder">Twoje ostatnie zamówienia</string>
+    <string name="yourOrderSub">Your recent order details</string>
+    <string name="orderHistory">Order  History</string>
+    <string name="orderHistorySub">See hisotory of you orders</string>
+
+</resources>
