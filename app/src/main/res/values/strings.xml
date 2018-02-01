@@ -8,4 +8,8 @@
     <string name="orderHistorySub">See hisotory of you orders</string>
     <string name="yourAccount">Your Account</string>
     <string name="yourAccountSub">Your account detalis</string>
+    <string name="searchForProduct">Seach for product</string>
+    <string name="productName">Name :</string>
+    <string name="productDiscp">Discription</string>
+    <string name="productPrice">Prize</string>
 </resources>
