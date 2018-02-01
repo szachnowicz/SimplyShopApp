@@ -24,7 +24,7 @@ public class MainActivityPresenter {
         boomMenuButton.addBuilder(getSearchInShopBulider());
         boomMenuButton.addBuilder(getYourOrderBulider());
         boomMenuButton.addBuilder(getOrderHistoryBulider());
-        boomMenuButton.addBuilder(getOrderHistoryBulider());
+        boomMenuButton.addBuilder(getUserAccountDetails());
 
 
     }
@@ -35,6 +35,17 @@ public class MainActivityPresenter {
                 .normalTextRes(R.string.orderHistory)
                 .subNormalTextRes(R.string.orderHistorySub)
                 .normalImageRes(R.drawable.ic_history)
+                .listener(index -> {
+                })
+                .build(context);
+        return builder;
+    }
+    private HamButton.Builder getUserAccountDetails() {
+        HamButton.Builder builder = new HamButton.Builder();
+        builder.normalColor(Color.parseColor("#CFB53B"))
+                .normalTextRes(R.string.yourAccount)
+                .subNormalTextRes(R.string.yourAccountSub)
+                .normalImageRes(R.drawable.ic_account)
                 .listener(index -> {
                 })
                 .build(context);

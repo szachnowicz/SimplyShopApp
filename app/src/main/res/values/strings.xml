@@ -6,4 +6,6 @@
     <string name="yourOrderSub">Your recent order details</string>
     <string name="orderHistory">Order History</string>
     <string name="orderHistorySub">See hisotory of you orders</string>
+    <string name="yourAccount">Your Account</string>
+    <string name="yourAccountSub">Your account detalis</string>
 </resources>
