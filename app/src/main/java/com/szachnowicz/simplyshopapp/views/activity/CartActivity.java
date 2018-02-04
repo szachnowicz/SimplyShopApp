@@ -6,7 +6,10 @@ import android.widget.ListView;
 
 import com.szachnowicz.simplyshopapp.R;
 import com.szachnowicz.simplyshopapp.model.ImgProduct;
+import com.szachnowicz.simplyshopapp.model.Order;
 import com.szachnowicz.simplyshopapp.model.OrderItem;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderItemRepo;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderRepo;
 import com.szachnowicz.simplyshopapp.views.listView.CartAdpater;
 
 import java.util.ArrayList;
@@ -14,6 +17,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class CartActivity extends AppCompatActivity {
     @BindView(R.id.cartListView)
@@ -25,17 +30,42 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         ButterKnife.bind(this);
-        List<OrderItem> imgProducts = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            final OrderItem orderItem = new OrderItem();
-            orderItem.setImgProduct(new ImgProduct());
-            imgProducts.add(orderItem);
+        setUpAdpter();
+        getCurrentOrder();
+    }
 
-        }
-        cartAdpater = new CartAdpater(getApplicationContext(), imgProducts);
-listView.setAdapter(cartAdpater);
+    private void setUpAdpter() {
+
+        cartAdpater = new CartAdpater(getApplicationContext(), new ArrayList<>());
+        listView.setAdapter(cartAdpater);
+
 
     }
 
+
+    private void getCurrentOrder() {
+        // this is hardcoed, becouse there is no users in app;
+        new OrderRepo(getApplicationContext()).getCurrentOrder(0)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread()).
+                subscribe(order -> {
+                    if (!order.isCompleted()) {
+                        getAndDisplayOrderTimes(order);
+                    }
+
+
+                });
+
+    }
+
+    private void getAndDisplayOrderTimes(Order order) {
+        new OrderItemRepo(getApplicationContext()).getAllForOrder(order)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread()).
+                subscribe(orderItem -> {
+                    cartAdpater.addToList(orderItem);
+                });
+
+    }
 
 }

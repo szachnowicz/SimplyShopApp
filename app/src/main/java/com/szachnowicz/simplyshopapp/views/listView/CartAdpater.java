@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.szachnowicz.simplyshopapp.R;
 import com.szachnowicz.simplyshopapp.model.ImgProduct;
 import com.szachnowicz.simplyshopapp.model.OrderItem;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderItemRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,6 @@ public class CartAdpater extends ArrayAdapter<OrderItem> {
 
     @BindView(R.id.productPicView)
     ImageView imageView;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
     @BindView(R.id.itemName)
     EditText productName;
     @BindView(R.id.itemsNo)
@@ -46,6 +44,8 @@ public class CartAdpater extends ArrayAdapter<OrderItem> {
     ImageButton addButton;
     @BindView(R.id.removeButton)
     ImageButton removeButton;
+    @BindView(R.id.deleteButton)
+    ImageButton deleteButton;
 
 
     public CartAdpater(@NonNull Context context, List<OrderItem> orderItemList) {
@@ -56,7 +56,7 @@ public class CartAdpater extends ArrayAdapter<OrderItem> {
 
 
     public void addToList(OrderItem orderItem) {
-        if (orderItemList != null) {
+        if (orderItemList == null) {
             orderItemList = new ArrayList<>();
         }
         orderItemList.add(orderItem);
@@ -82,8 +82,16 @@ public class CartAdpater extends ArrayAdapter<OrderItem> {
         final OrderItem orderItem = orderItemList.get(position);
         final ImgProduct imgProduct = orderItem.getImgProduct();
         productName.setText(imgProduct.getName());
-        setQuanityty(orderItem);
+        productQuantity.setText(orderItem.getQuantity() + "");
 
+
+        setUpButtonListeners(position, orderItem);
+        loadPictureAndSetVisibiltyToProgresBar(imgProduct);
+
+        return rowView;
+    }
+
+    private void setUpButtonListeners(int position, OrderItem orderItem) {
         addButton.setOnClickListener(view -> {
             int quantity = orderItem.getQuantity() + 1;
             orderItem.setQuantity(quantity);
@@ -99,23 +107,35 @@ public class CartAdpater extends ArrayAdapter<OrderItem> {
             }
         });
 
+        deleteButton.setOnClickListener(view ->
+        {
+            new OrderItemRepo(context).removeRecord(orderItem);
 
-        Picasso.with(context).load(imgProduct.getUrl()).into(imageView, new Callback() {
-            @Override
-            public void onSuccess() {
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onError() {
-
-            }
+            orderItemList.remove(position);
+            notifyDataSetChanged();
         });
+    }
 
-        return rowView;
+    private void loadPictureAndSetVisibiltyToProgresBar(ImgProduct imgProduct) {
+        Picasso.with(context).load(imgProduct.getUrl()).into(imageView);
+// , new Callback() {
+//            @Override
+//                public void onSuccess() {
+//                if (progressBar.getVisibility() == View.VISIBLE) {
+//                    progressBar.setVisibility(View.GONE);
+//                    notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onError() {
+//
+//            }
+//        });
     }
 
     private void setQuanityty(OrderItem orderItem) {
         productQuantity.setText(orderItem.getQuantity() + "");
+        notifyDataSetChanged();
     }
 }

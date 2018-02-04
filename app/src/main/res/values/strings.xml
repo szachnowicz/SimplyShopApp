@@ -17,4 +17,5 @@
     <string name="sellManInfo">Salesman info</string>
     <string name="finishOrder">Process order</string>
     <string name="productQuanity">quantity</string>
+    <string name="itemRemoved">Item Removed</string>
 </resources>

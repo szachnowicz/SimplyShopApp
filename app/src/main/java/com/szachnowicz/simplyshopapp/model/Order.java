@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Order {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     private long id;
 
     private long userId;

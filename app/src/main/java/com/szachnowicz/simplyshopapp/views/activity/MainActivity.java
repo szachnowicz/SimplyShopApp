@@ -7,14 +7,19 @@ import android.widget.Toast;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.szachnowicz.simplyshopapp.R;
 import com.szachnowicz.simplyshopapp.model.ImgProduct;
+import com.szachnowicz.simplyshopapp.model.Order;
 import com.szachnowicz.simplyshopapp.model.SeenProduct;
 import com.szachnowicz.simplyshopapp.presenter.MainActivityPresenter;
+import com.szachnowicz.simplyshopapp.repository.dao.OrderDao;
 import com.szachnowicz.simplyshopapp.repository.repo.ImgProductRepo;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderItemRepo;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderRepo;
 import com.szachnowicz.simplyshopapp.repository.repo.SeenProductRepo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -34,31 +39,34 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         presenter = new MainActivityPresenter(getApplicationContext());
         presenter.initMenu(boomMenuButton);
-
+        creatAndAddToDbOrder();
         testMethod();
 
 
     }
 
-    private void testMethod() {
-//        final ImgProductRepo imgProductRepo = new ImgProductRepo(getApplicationContext());
-//
-////        imgProductRepo.getAllRecords().subscribeOn(Schedulers.io())
-////                .observeOn(AndroidSchedulers.mainThread()).
-////                subscribe(abstractProduct -> {
-////                    Toasty.success(getApplicationContext(), abstractProduct.getName(), Toast.LENGTH_SHORT).show();
-////                });
+    private void creatAndAddToDbOrder() {
+        Order order = new Order();
+        order.setCompleted(false);
+        order.setId(0);
+        order.setUserId(0);
+        new OrderRepo(getApplicationContext()).addRecord(order);
+    }
 
-        new SeenProductRepo(getApplicationContext()).getAllRecords()
+    private void testMethod() {
+        new OrderItemRepo(getApplicationContext()).getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).
-                subscribe(abstractProduct -> {
-                    Toasty.success(getApplicationContext(), abstractProduct.getImgProduct().getName(), Toast.LENGTH_SHORT).show();
+                subscribe(order -> {
+                    Toasty.success(getApplicationContext(), order.getId()+"", Toast.LENGTH_SHORT).show();
                 });
 
-
-
-
+//        new SeenProductRepo(getApplicationContext()).getAllRecords()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread()).
+//                subscribe(abstractProduct -> {
+//                    Toasty.success(getApplicationContext(), abstractProduct.getImgProduct().getName(), Toast.LENGTH_SHORT).show();
+//                });
 
 
     }

@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 
 import com.szachnowicz.simplyshopapp.R;
 import com.szachnowicz.simplyshopapp.model.ImgProduct;
+import com.szachnowicz.simplyshopapp.model.Order;
 import com.szachnowicz.simplyshopapp.presenter.BrowseAPresenter;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderRepo;
 import com.szachnowicz.simplyshopapp.views.recyclerView.adapter.ShopProductAdapter;
 
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -30,6 +34,7 @@ public class BrowseActivity extends AppCompatActivity implements SearchView.OnQu
 
     private BrowseAPresenter presenter = new BrowseAPresenter();
     private ShopProductAdapter productAdapter;
+    private Order currnetOrder;
 
 
     @Override
@@ -39,6 +44,20 @@ public class BrowseActivity extends AppCompatActivity implements SearchView.OnQu
         ButterKnife.bind(this);
         creatRecyclerView(recyclerView);
         searchView.setOnQueryTextListener(this);
+        getCurrentOrder();
+
+    }
+
+    private void getCurrentOrder() {
+        // this is hardcoed, bc there is no users in app;
+        new OrderRepo(getApplicationContext()).getCurrentOrder(0)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).
+                subscribe(order -> {
+                    if (!order.isCompleted())
+                        setCurrnetOrder(order);
+                    productAdapter.setCurrnetOrder(order);
+                });
 
     }
 
@@ -49,12 +68,12 @@ public class BrowseActivity extends AppCompatActivity implements SearchView.OnQu
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         presenter.getFakeProduct()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.single())
                 .observeOn(AndroidSchedulers.mainThread()).
-                        subscribe(abstractProduct -> {
-                            productAdapter.addNewProduct(abstractProduct);
-                            presenter.addNewProduct(abstractProduct);
-                        });
+                subscribe(abstractProduct -> {
+                    productAdapter.addNewProduct(abstractProduct);
+                    presenter.addNewProduct(abstractProduct);
+                });
 
     }
 
@@ -84,5 +103,9 @@ public class BrowseActivity extends AppCompatActivity implements SearchView.OnQu
         }
         productAdapter.setProductsList(filteredList);
         return true;
+    }
+
+    public void setCurrnetOrder(Order currnetOrder) {
+        this.currnetOrder = currnetOrder;
     }
 }

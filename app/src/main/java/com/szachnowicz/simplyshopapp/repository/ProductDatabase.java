@@ -9,6 +9,8 @@ import com.szachnowicz.simplyshopapp.model.ImgProduct;
 import com.szachnowicz.simplyshopapp.model.Order;
 import com.szachnowicz.simplyshopapp.model.OrderItem;
 import com.szachnowicz.simplyshopapp.model.SeenProduct;
+import com.szachnowicz.simplyshopapp.repository.dao.OrderDao;
+import com.szachnowicz.simplyshopapp.repository.dao.OrderItemDao;
 import com.szachnowicz.simplyshopapp.repository.dao.ProductDao;
 import com.szachnowicz.simplyshopapp.repository.dao.SeenProductDao;
 
@@ -16,7 +18,7 @@ import com.szachnowicz.simplyshopapp.repository.dao.SeenProductDao;
 /**
  * Created by Sebastian on 2018-02-03.
  */
-@Database(entities = {ImgProduct.class, SeenProduct.class, Order.class, OrderItem.class}, version = 6, exportSchema = false)
+@Database(entities = {ImgProduct.class, SeenProduct.class, Order.class, OrderItem.class}, version = 8, exportSchema = false)
 public abstract class ProductDatabase extends RoomDatabase {
 
     private static volatile ProductDatabase INSTANCE;
@@ -42,6 +44,10 @@ public abstract class ProductDatabase extends RoomDatabase {
     public static void destroyInstance() {
         INSTANCE = null;
     }
+
+    public abstract OrderDao orderDao();
+
+    public abstract OrderItemDao orderItemDao();
 }
 
 

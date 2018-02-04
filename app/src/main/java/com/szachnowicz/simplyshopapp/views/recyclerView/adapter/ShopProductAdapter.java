@@ -11,6 +11,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.szachnowicz.simplyshopapp.R;
 import com.szachnowicz.simplyshopapp.model.ImgProduct;
+import com.szachnowicz.simplyshopapp.model.Order;
+import com.szachnowicz.simplyshopapp.model.OrderItem;
+import com.szachnowicz.simplyshopapp.repository.repo.OrderItemRepo;
 import com.szachnowicz.simplyshopapp.views.activity.ProductDetalisActivity;
 import com.szachnowicz.simplyshopapp.views.recyclerView.holders.AbstractHolder;
 import com.szachnowicz.simplyshopapp.views.recyclerView.holders.ShopProductHolder;
@@ -26,6 +29,7 @@ import es.dmoral.toasty.Toasty;
 public class ShopProductAdapter extends AbstractAdapter {
 
     private List<ImgProduct> productsList;
+    private Order order;
 
     public ShopProductAdapter(Context context, @NonNull List<ImgProduct> productsList) {
         super(context);
@@ -69,7 +73,13 @@ public class ShopProductAdapter extends AbstractAdapter {
         });
 
         itemHolder.addToCartButton.setOnClickListener(view -> {
-            Toasty.success(context, context.getString(R.string.addedToCart), Toast.LENGTH_SHORT).show();
+            OrderItem orderItem = new OrderItem();
+            orderItem.setQuantity(1);
+            orderItem.setImgProduct(product);
+            orderItem.setOrderId(order.getId());
+
+            new OrderItemRepo(context).addRecord(orderItem);
+
         });
 
         itemHolder.addToFavoriteButton.setOnClickListener(view -> {
@@ -97,6 +107,10 @@ public class ShopProductAdapter extends AbstractAdapter {
 
     public void setProductsList(List<ImgProduct> productsList) {
         this.productsList = productsList;
+    }
+
+    public void setCurrnetOrder(Order order) {
+        this.order = order;
     }
 }
 

@@ -23,11 +23,11 @@ public interface OrderDao {
     void update(Order... orders);
 
     @Query("SELECT * FROM `Order`")
-    List<Order> getAllOrder();
+    List<Order> getAllOrders();
 
 
-    @Query("SELECT * FROM `Order` WHERE orderId=:orderId AND completed='false'")
-    List<Order> getUnComplitedOrderForUser(final long orderId);
+    @Query("SELECT * FROM `Order` WHERE userId=:userId")
+    List<Order> getUnComplitedOrderForUser(final long userId);
 
 
 
