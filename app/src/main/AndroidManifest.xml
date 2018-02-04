@@ -3,6 +3,7 @@
     package="com.szachnowicz.simplyshopapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,14 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.MainActivity">
+        <activity android:name=".views.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.BrowseActivity"></activity>
+        <activity android:name=".views.activity.BrowseActivity" />
+        <activity android:name=".views.activity.ProductDetalisActivity" />
+        <activity android:name=".views.activity.CartActivity"></activity>
     </application>
 
 </manifest>

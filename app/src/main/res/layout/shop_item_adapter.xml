@@ -24,15 +24,16 @@
 
             <ImageView
                 android:id="@+id/productImg"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/piece" />
+                app:srcCompat="@drawable/background_gradient" />
 
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -42,13 +43,15 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:focusable="false"
+                android:fontFamily="monospace"
                 android:hint="@string/productName"
                 android:text="item"
-                app:met_floatingLabel="highlight"
                 android:textAlignment="center"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productImg" />
+                app:layout_constraintTop_toBottomOf="@+id/productImg"
+                app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/productDiscp"
@@ -79,13 +82,50 @@
                 android:hint="@string/productPrice"
                 android:text="100zł"
                 android:textAlignment="center"
-                app:met_floatingLabel="highlight"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/addToFavoriteButton"
+                app:layout_constraintStart_toEndOf="@+id/addToCartButton"
+                app:layout_constraintTop_toBottomOf="@+id/productDiscp"
+                app:layout_constraintVertical_bias="0.0"
+                app:met_floatingLabel="highlight" />
+
+            <ImageButton
+                android:id="@+id/addToCartButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_action_name"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/addToFavoriteButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_favorite"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/loadImgProgresssBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/productName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productDiscp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </android.support.constraint.ConstraintLayout>

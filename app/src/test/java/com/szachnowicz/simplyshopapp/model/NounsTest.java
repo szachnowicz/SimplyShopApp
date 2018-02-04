@@ -486,4 +486,14 @@ public class NounsTest {
             System.out.println(Nouns.getRandomNoun());
         }
     }
+
+
+    @Test
+    public void nameRandomPrice() throws Exception {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(Nouns.randomPrice());
+        }
+
+
+    }
 }

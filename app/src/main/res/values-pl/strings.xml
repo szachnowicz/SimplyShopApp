@@ -12,5 +12,9 @@
     <string name="searchForProduct">Seach for product</string>
     <string name="productName">Name :</string>
     <string name="productPrice">Prize</string>
+    <string name="addedToFavorite">Added to favorite products</string>
+    <string name="addedToCart">Added to Cart</string>
+    <string name="sellManInfo">Salesman info</string>
+    <string name="finishOrder">Process order</string>
 
 </resources>

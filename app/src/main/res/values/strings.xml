@@ -12,4 +12,9 @@
     <string name="productName">Name :</string>
     <string name="productDiscp">Discription</string>
     <string name="productPrice">Prize</string>
+    <string name="addedToFavorite">Added to favorite products</string>
+    <string name="addedToCart">Added to Cart</string>
+    <string name="sellManInfo">Salesman info</string>
+    <string name="finishOrder">Process order</string>
+    <string name="productQuanity">quantity</string>
 </resources>

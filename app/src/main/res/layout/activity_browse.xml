@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.szachnowicz.simplyshopapp.views.BrowseActivity">
+    tools:context="com.szachnowicz.simplyshopapp.views.activity.BrowseActivity">
 
 
     <SearchView
@@ -16,6 +16,7 @@
         android:layout_marginTop="8dp"
         android:iconifiedByDefault="false"
         android:padding="2dp"
+        android:focusable="false"
         android:queryHint="@string/searchForProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,8 +1,11 @@
 package com.szachnowicz.simplyshopapp.views.recyclerView.holders;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.szachnowicz.simplyshopapp.R;
 
@@ -13,7 +16,7 @@ import butterknife.ButterKnife;
  * Created by Sebastian on 2018-02-01.
  */
 
-public class ShopItemHolder extends AbstractHolder {
+public class ShopProductHolder extends AbstractHolder {
     @BindView(R.id.productImg)
     public ImageView itemImage;
     @BindView(R.id.productName)
@@ -23,8 +26,15 @@ public class ShopItemHolder extends AbstractHolder {
     @BindView(R.id.productPrice)
     public EditText itemPrice;
 
+    @BindView(R.id.addToCartButton)
+    public ImageButton addToCartButton;
+    @BindView(R.id.addToFavoriteButton)
+    public ImageButton addToFavoriteButton;
+    @BindView(R.id.loadImgProgresssBar)
+    public ProgressBar progressBar;
 
-    public ShopItemHolder(View view) {
+
+    public ShopProductHolder(View view) {
         super(view);
         ButterKnife.bind(view);
     }

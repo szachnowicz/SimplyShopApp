@@ -61,6 +61,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    // dialog plus
+    compile 'com.orhanobut:dialogplus:1.11@aar'
 
 
 }

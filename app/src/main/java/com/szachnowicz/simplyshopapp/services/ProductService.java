@@ -1,8 +1,6 @@
 package com.szachnowicz.simplyshopapp.services;
 
-import com.szachnowicz.simplyshopapp.model.AbstractProduct;
 import com.szachnowicz.simplyshopapp.model.ImgProduct;
-import com.szachnowicz.simplyshopapp.model.NoImgProduct;
 
 /**
  * Created by Sebastian on 2018-02-01.
@@ -11,17 +9,10 @@ import com.szachnowicz.simplyshopapp.model.NoImgProduct;
 public class ProductService  {
 
 
-
-    public  static AbstractProduct getRandomProduct(){
-
-            if(Math.random()>0.5)
+    public static ImgProduct getRandomProduct(){
                 return new ImgProduct();
-            else
-                return new NoImgProduct();
-
-
-
-
     }
+
+
 
 }

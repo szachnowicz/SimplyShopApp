@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 
 import com.nightonke.boommenu.BoomButtons.HamButton;
-import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.szachnowicz.simplyshopapp.R;
-import com.szachnowicz.simplyshopapp.views.BrowseActivity;
+import com.szachnowicz.simplyshopapp.views.activity.BrowseActivity;
+import com.szachnowicz.simplyshopapp.views.activity.CartActivity;
 
 /**
  * Created by Sebastian on 2018-02-01.
@@ -62,6 +62,9 @@ public class MainActivityPresenter {
                 .subNormalTextRes(R.string.yourOrderSub)
                 .normalImageRes(R.drawable.ic_recent_order)
                 .listener(index -> {
+                    Intent intent = new Intent(context, CartActivity.class);
+                    context.startActivity(intent);
+
                 })
                 .build(context);
         return builder;
